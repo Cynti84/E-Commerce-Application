@@ -27,7 +27,7 @@ public class CartActivity extends AppCompatActivity {
         }
 
         // Set Adapter
-        cartAdapter = new CartAdapter(ProductListActivity.cart, this::onRemove);
+        cartAdapter = new CartAdapter(ProductListActivity.cart);
         cartRecyclerView.setAdapter(cartAdapter);
     }
 

@@ -13,6 +13,8 @@ public class ProductListActivity extends AppCompatActivity {
     private ProductListAdapter productListAdapter;
     private List<Product> productList;
 
+    protected static ArrayList cart;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

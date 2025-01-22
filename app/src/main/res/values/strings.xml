@@ -8,4 +8,5 @@
     <string name="product_name">Product name</string>
     <string name="price">price</string>
     <string name="product_image_desc">product image dexcription</string>
+    <string name="checkout">Checkout</string>
 </resources>
