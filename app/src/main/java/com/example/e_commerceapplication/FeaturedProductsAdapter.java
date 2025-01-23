@@ -31,14 +31,14 @@ public class FeaturedProductsAdapter extends RecyclerView.Adapter<FeaturedProduc
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Product currentProduct = productList.get(position);
         // Set the product name and price
-        holder.productName.setText(currentProduct.getProductName());
-        holder.productPrice.setText("$" + currentProduct.getProductPrice());
+        holder.productName.setText(currentProduct.getName());
+        holder.productPrice.setText("$" + currentProduct.getPrice());
 
         // Load the product image using Picasso
         //Picasso.get().load(currentProduct.getProductImage()).into(holder.productImage);
 
         // Load image using drawables
-        holder.productImage.setImageResource(currentProduct.getProductImage());
+        holder.productImage.setImageResource(currentProduct.getImageResource());
     }
 
     @Override
