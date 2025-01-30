@@ -1,25 +1,50 @@
 package com.example.e_commerceapplication;
 
-import java.util.Objects;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Product {
-    private final String name;
-    private final double price;
-    private final int imageResource; // Drawable resource ID
+public class Product implements Parcelable {
+    private String name;
+    private double price;
+    private int imageResource;
 
     public Product(String name, double price, int imageResource) {
-        if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("Product name cannot be null or empty");
-        }
-        if (price < 0) {
-            throw new IllegalArgumentException("Product price cannot be negative");
-        }
-
         this.name = name;
         this.price = price;
         this.imageResource = imageResource;
     }
 
+    protected Product(Parcel in) {
+        name = in.readString();
+        price = in.readDouble();
+        imageResource = in.readInt();
+    }
+
+    public static final Creator<Product> CREATOR = new Creator<Product>() {
+        @Override
+        public Product createFromParcel(Parcel in) {
+            return new Product(in);
+        }
+
+        @Override
+        public Product[] newArray(int size) {
+            return new Product[size];
+        }
+    };
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeDouble(price);
+        dest.writeInt(imageResource);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    // Getters
     public String getName() {
         return name;
     }
@@ -30,29 +55,5 @@ public class Product {
 
     public int getImageResource() {
         return imageResource;
-    }
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "name='" + name + '\'' +
-                ", price=" + price +
-                ", imageResource=" + imageResource +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        return Double.compare(product.price, price) == 0 &&
-                imageResource == product.imageResource &&
-                name.equals(product.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, price, imageResource);
     }
 }

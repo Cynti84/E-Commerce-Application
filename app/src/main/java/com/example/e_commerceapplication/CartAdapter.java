@@ -7,16 +7,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.e_commerceapplication.CartItem;
-import com.example.e_commerceapplication.R;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
-    private List<CartItem> cartItems;
 
-    public CartAdapter(List<CartItem> cartItems) {
+    private List<Product> cartItems;
+
+    public CartAdapter(List<Product> cartItems) {
         this.cartItems = cartItems;
     }
 
@@ -29,10 +26,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
-        CartItem item = cartItems.get(position);
-        holder.productName.setText(item.getName());
-        holder.productPrice.setText("KES " + item.getPrice());
-        holder.productQuantity.setText("Qty: " + item.getQuantity());
+        Product product = cartItems.get(position);
+        holder.productName.setText(product.getName());
+        holder.productPrice.setText("KES " + product.getPrice());
     }
 
     @Override
@@ -41,13 +37,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     }
 
     static class CartViewHolder extends RecyclerView.ViewHolder {
-        TextView productName, productPrice, productQuantity;
+        TextView productName, productPrice;
 
-        public CartViewHolder(View itemView) {
+        public CartViewHolder(@NonNull View itemView) {
             super(itemView);
             productName = itemView.findViewById(R.id.productName);
             productPrice = itemView.findViewById(R.id.productPrice);
-            productQuantity = itemView.findViewById(R.id.productQuantity);
         }
     }
 }

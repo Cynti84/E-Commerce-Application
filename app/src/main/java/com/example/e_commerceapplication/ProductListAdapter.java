@@ -7,8 +7,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ProductViewHolder> {
@@ -32,11 +36,21 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = productList.get(position);
         holder.productName.setText(product.getName());
-        holder.productPrice.setText(String.format("$%.2f", product.getPrice()));
+        holder.productPrice.setText("KES " + product.getPrice());
         holder.productImage.setImageResource(product.getImageResource());
 
         holder.addToCartButton.setOnClickListener(v -> {
             // Handle adding product to cart
+            if (ProductListActivity.cart == null) {
+                ProductListActivity.cart = new ArrayList<>();
+            }
+
+            if (!ProductListActivity.cart.contains(product)) {
+                ProductListActivity.cart.add(product);
+                Toast.makeText(context, product.getName() + " added to cart!", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, product.getName() + " is already in the cart.", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 

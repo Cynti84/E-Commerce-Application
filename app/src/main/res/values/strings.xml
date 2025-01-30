@@ -6,7 +6,10 @@
     <string name="profile">Profile</string>
     <string name="product_image">Product Image</string>
     <string name="product_name">Product name</string>
-    <string name="price">price</string>
-    <string name="product_image_desc">product image dexcription</string>
+    <string name="price">KES</string>
+    <string name="product_image_desc">product image description</string>
     <string name="checkout">Checkout</string>
+    <string name="price2">KES 0.00</string>
+    <string name="go_to_cart">Go to Checkout</string>
+    <string name="person_icon">Person Icon</string>
 </resources>
