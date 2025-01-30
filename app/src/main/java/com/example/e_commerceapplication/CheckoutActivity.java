@@ -7,16 +7,16 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
-import com.example.e_commerceapplication.CartItem;
 
 public class CheckoutActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private TextView totalAmountText;
     private Button proceedToPayBtn;
     private CartAdapter cartAdapter;
-    private List<CartItem> cartItems;
+    private List<Product> productList; // Use Product as cart item to ensure consistency
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,32 +28,37 @@ public class CheckoutActivity extends AppCompatActivity {
         totalAmountText = findViewById(R.id.totalAmount);
         proceedToPayBtn = findViewById(R.id.btnProceedToPay);
 
-        // Sample cart data (Replace with real database data)
-        cartItems = new ArrayList<>();
-        cartItems.add(new CartItem("Laptop", 50000.0, 1));
-        cartItems.add(new CartItem("Mouse", 1000.0, 2));
-        cartItems.add(new CartItem("Keyboard", 2500.0, 1));
+        // Fetch the cart data from ProductListActivity
+        if (ProductListActivity.cart != null) {
+            productList = ProductListActivity.cart;
+        } else {
+            productList = new ArrayList<>(); // Ensure no null-pointer exceptions
+        }
 
-        cartAdapter = new CartAdapter(cartItems);
+        // Set up the adapter
+        cartAdapter = new CartAdapter(productList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(cartAdapter);
 
+        // Calculate and display the total price
         updateTotalPrice();
 
-        // Set up button click listener to go to payment screen
+        // Set up the button click listener
         proceedToPayBtn.setOnClickListener(v -> {
             Intent intent = new Intent(CheckoutActivity.this, PaymentActivity.class);
             intent.putExtra("totalAmount", calculateTotal()); // Pass the total amount
+            intent.putParcelableArrayListExtra("ProductList", new ArrayList<>(productList)); // Pass the cart items if needed
             startActivity(intent);
         });
     }
 
     private double calculateTotal() {
-        double total = 0;
-        for (CartItem item : cartItems) {
-            total += item.getPrice() * item.getQuantity();
+        double total = 0.0;
+        for (Product item : productList) {
+            total += item.getPrice();
+// Add product price to total
         }
-        return total;
+        return Math.round(total * 100.0) / 100.0;
     }
 
     private void updateTotalPrice() {

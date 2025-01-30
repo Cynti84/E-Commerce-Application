@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:text="Payment Details"
         android:textSize="24sp"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"/>
 
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:text="Total Amount: KES 0.00"
         android:textSize="18sp"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:layout_below="@id/paymentTitle"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"/>

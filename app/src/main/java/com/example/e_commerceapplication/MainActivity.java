@@ -6,20 +6,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private RecyclerView featuredProductsRecyclerView;
-    private FeaturedProductsAdapter featuredProductsAdapter;
-    private List<Product> productList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         // Initialize button for checkout
         Button btnCheckout = findViewById(R.id.btnCheckout);
@@ -36,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+
+
+
+
         // Initialize person icon for login
         ImageView personIcon = findViewById(R.id.personIcon);
         personIcon.setOnClickListener(v -> {
@@ -44,19 +46,17 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Initialize the RecyclerView for featured products
-        featuredProductsRecyclerView = findViewById(R.id.featuredProductsRecyclerView);
-        featuredProductsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 
         // Initialize the product list
-        productList = new ArrayList<>();
+        List<Product> productList = new ArrayList<>();
 
         // Add products to the list
         productList.add(new Product("Basic White T-Shirt", 15.99, R.drawable.white));
         productList.add(new Product("Slim Fit Denim Jeans", 39.99, R.drawable.jeans));
-
-        // Initialize the adapter and set it to the RecyclerView
-        featuredProductsAdapter = new FeaturedProductsAdapter(productList);
-        featuredProductsRecyclerView.setAdapter(featuredProductsAdapter);
+        productList.add(new Product("Big Cute Hoddie ", 48.99, R.drawable.hoddie));
+        productList.add(new Product("Pretty Skirt Outfit", 100.99, R.drawable.skirt));
+        productList.add(new Product("Green Nike Sneakers", 178.99, R.drawable.sneakers));
+        productList.add(new Product("Summer Dress", 39.99, R.drawable.dress));
     }
 }
